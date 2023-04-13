@@ -10,11 +10,33 @@
     <title>Dinner Party Personality Test</title>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
-    <style>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">    
+   <style>
+        /* Add styles for the typewriter animation */
+        /* .typewriter {
+        overflow: hidden;
+        border-right: .15em solid transparent;
+        white-space: nowrap;
+        animation: typing 3.5s steps(40, end), blink-caret .5s step-end infinite;
+    } */
+
+    @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+        50% { border-color: transparent; }
+    }
+
+    /* Add styles for the glow effect */
+    .glow {
+        text-shadow: 0 0 10px transparent, 0 0 20px transparent, 0 0 30px transparent, 0 0 40px transparent, 0 0 50px #ffffff, 0 0 60px #ffffff;
+    }
         body {
             font-family: 'Red Hat Display', sans-serif;
             /* background-color: #f0f0f0; */
-            /* cursor: url('data:image/x-icon;base64,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VQP/VVUD/wBVA/8AAAH/AAAB/wAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAf8AAAH/AAAB/wAAAv8AVQP/VVUD/1VVA/9VVQP/VVUD/1VVA/9VVQP/JVUD/wAAAv8AAAH/AAAB/wAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAH/AAAB/wAAAf8AAAH/AAAB/wAAAv8AAAL/AAAC/wAAAf8AAAH/AAAB/wAAAf8AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAf8AAAH/AAAB/wAAAf8AAAH/AAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//////////////////////////////////////////////////9////+P///8B////AH///gB///wAf//4AD///AAP//4AP//+AH///QD////B////7////+//////////////////////////////////////////////////8='), auto;  */
         }
         h1 {
             /* font-family: 'Inconsolata', sans-serif; */
@@ -33,30 +55,37 @@
             max-width: 800px;
             margin: auto;
             padding: 20px;
-            background-color: rgba(255, 255, 255, 0.3); /* Adjust the last value (0.3) to control the translucency */
+            background-color: rgba(0, 0, 0, 0.3); /* Adjust the last value (0.3) to control the translucency */
             border: none;
-            border-radius: 4px;
+            border-radius: 50px;
     }
 
         .message {
             padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #d3bedcb2;
+            /* font-family: 'Libre Baskerville', serif;  */
+            margin-bottom: 15px; 
+            background-color: transparent; 
         }
 
         .question {
-            background-color: #f8f8f8;
+            background-color: transparent;
+            margin-bottom: 15px; 
+            padding: 10px;
+            font-family: 'Libre Baskerville', serif;
         }
 
         .response-input {
             font-family: 'Red Hat Display', sans-serif;
-            width: 60%;
+            height: 100px;
+            resize: vertical;
             padding: 12px 20px;
             font-size: 15px;
             border-radius: 4px;
             background-color: #faefff;
+            width: calc(100% - 40px);
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
         }
 
         .sick-button {
@@ -128,35 +157,53 @@
     <button id="next" class="sick-button">START</button>
     <h1 id="loadingMessage" style="display:none;">Analysis Loading...</h1>
     <script>
-        function appendQuestion(question) {
-            $("#chat-container").append('<div class="message question">' + question + '</div>');
-        }
+function appendQuestion(question) {
+    const questionElement = $('<div class="question glow"></div>');
+    questionElement.appendTo("#chat-container");
+    new TypeIt(questionElement[0], {
+        strings: question,
+        speed: 80,
+        waitUntilVisible: true
+    }).go();
+}
+    // setTimeout(function() {
+    //     questionElement.removeClass('typewriter');
+    // }, 3500);
+
+
+function typeQuestion(question) {
+    return new Promise(function(resolve) {
+        appendQuestion(question);
+        setTimeout(resolve, 3500);
+    });
+}
+
 
         function appendResponse(response) {
             $("#chat-container").append('<div class="message response">' + response + '</div>');
         }
 
         function getUserInput() {
-    return new Promise(function(resolve, reject) {
-        let responseInput = $('<input type="text" class="response-input">');
-        let sendButton = $('<button class="sick-button">SEND</button>');
-        $("#chat-container").append(responseInput);
-        $("#chat-container").append(sendButton);
-        responseInput.focus();
-        sendButton.click(function() {
-            resolve(responseInput.val());
-            responseInput.remove();
-            sendButton.remove();
-        });
-        responseInput.on('keypress', function(e) {
-            if (e.which == 13) {
-                resolve(responseInput.val());
-                responseInput.remove();
-                sendButton.remove();
-            }
-        });
-    });
-}
+            return new Promise(function(resolve, reject) {
+                let responseInput = $('<textarea class="response-input"></textarea>');
+                let sendButton = $('<button class="sick-button">SEND</button>');
+                $("#chat-container").append(responseInput);
+                $("#chat-container").append(sendButton);
+                responseInput.focus();
+                sendButton.click(function() {
+                    resolve(responseInput.val());
+                    responseInput.remove();
+                    sendButton.remove();
+                });
+                responseInput.on('keypress', function(e) {
+                    if (e.which == 13) {
+                        resolve(responseInput.val());
+                        responseInput.remove();
+                        sendButton.remove();
+                    }
+                });
+            });
+        }
 
 
         async function startGame() {
@@ -167,26 +214,12 @@
             $("#analysis").hide();
             $("#chat-container").hide();
             $("#analysis-panel").hide();
-            // new TypeIt("#welcome-message", {
-            //     speed: 80,
-            //     waitUntilVisible: true
-            // })
-            //     .type("This is a personality test.")
-            //     .pause(500)
-            //     .type("\nYou will be asked a series of questions.")
-            //     .pause(1000)
-            //     .type("\nPlease respond as elaborately as possible (the more words, the better).")
-            //     .pause(500)
-            //     .type("\nAfter 5 or more questions, you will have the option to view the results.")
-            //     .pause(1800)
-            //     .delete(213)
-            //     .type("Welcome to Dinner..")
-            //     .delete()
-            //     .go();
             
 
             function handleNextButtonClick() {
+                $("#chat-container").empty();
                 $("#chat-container").show();
+                $("#welcome-message").hide();
                 if (questionCounter < questions.length) {
                     askQuestion(questions[questionCounter]);
                     questionCounter++;
@@ -226,7 +259,7 @@
                 }
                 $("#next").show();
                 if (questionCounter >= 5) {
-                    $("#next").show();
+                    $("#next").hide();
                     $("#analysis").show();
                 }
             }
@@ -289,4 +322,3 @@
     </script>
 </body>
 </html>
-
