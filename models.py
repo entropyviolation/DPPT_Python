@@ -1,24 +1,27 @@
 import os
-from sqlalchemy import create_engine, Column, Integer, String, Text
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-
-Base = declarative_base()
-
-class ChatData(Base):
-    __tablename__ = "chat_data"
-
-    id = Column(Integer, primary_key=True)
-    responses = Column(Text)
-    analysis = Column(Text)
+import psycopg2
 
 # Set the DATABASE_URL variable to the connection string
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
-# Replace 'postgres://' with 'postgresql://' in the DATABASE_URL
-DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
+# Connect to the PostgreSQL database
+conn = psycopg2.connect(DATABASE_URL)
 
-engine = create_engine(DATABASE_URL)
-Base.metadata.create_all(engine)
+# Create a cursor object
+cur = conn.cursor()
 
-Session = sessionmaker(bind=engine)
+# Create the chat_data table if it doesn't exist
+cur.execute("""
+CREATE TABLE IF NOT EXISTS chat_data (
+    id SERIAL PRIMARY KEY,
+    responses TEXT,
+    analysis TEXT
+)
+""")
+
+# Commit the changes and close the cursor
+conn.commit()
+cur.close()
+
+# Don't forget to close the connection when you're done
+# conn.close()
