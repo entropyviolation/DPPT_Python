@@ -1,5 +1,7 @@
 import openai
 import random
+from models import ChatData, Session
+
 
 def init_api_key():
     openai.api_key = "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"
@@ -22,6 +24,13 @@ def analyze_responses(responses):
         model="gpt-3.5-turbo",
         messages= responses,
     )
+
+    # Save the chat data and analysis to the database
+    session = Session()
+    chat_data = ChatData(responses=str(responses), analysis=analysis)
+    session.add(chat_data)
+    session.commit()
+
     return analysis.choices[0].message['content'].strip()
     # analysis = ask_question(" ".join(r["content"] for r in responses), "You are a skilled psychoanalyst/psychologist interpreting the player's personality through their answers to hypothetical questions. Create an in-depth profile highlighting their philosophical beliefs, attitudes, values, and other personality traits. Make assumptions about their personal life, challenges, and perceptions using concepts like Jungian psychology, pathwork, or the Big Five traits when relevant. Conclude by recommending a song, book, and movie they might enjoy, guessing their age, gender, destined career, and location. Finally, suggest their spirit animal and a color that represents them, and explain why.")
     # return analysis
