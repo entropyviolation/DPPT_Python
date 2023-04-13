@@ -5,12 +5,7 @@
   "scripts": {
     "start": "python app.py"
   },
-  "dependencies": {
-    "openai": "^0.27.0",
-    "three": "^0.151.3",
-    "vanta": "^0.5.24",
-    "jquery": "^3.6.0",
-    "typeit": "^7.0.4",
-    "fonts-googleapis": "^1.0.0"
-  }
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
