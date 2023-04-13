@@ -1,3 +1,4 @@
+import os
 from sqlalchemy import create_engine, Column, Integer, String, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -11,7 +12,10 @@ class ChatData(Base):
     responses = Column(Text)
     analysis = Column(Text)
 
-engine = create_engine("sqlite:///chat_data.db")
+# Get the database URL from the environment variable
+database_url = os.environ['DATABASE_URL']
+
+engine = create_engine(database_url)
 Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
