@@ -1,13 +1,8 @@
 import openai
 import random
 from models import ChatData, Session
-import json
-import os
-# Set the DATABASE_URL variable to the connection string
-DATABASE_URL = os.environ.get('DATABASE_URL')
 
-# Connect to the PostgreSQL database
-conn = psycopg2.connect(DATABASE_URL)
+
 def init_api_key():
     openai.api_key = "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"
 
@@ -29,19 +24,6 @@ def analyze_responses(responses):
         model="gpt-3.5-turbo",
         messages= responses,
     )
-
-    # Save the chat data and analysis to the database
-    chat_data_responses = json.dumps(responses)
-    chat_data_analysis = json.dumps(analysis.choices[0].message)
-
-    cur = conn.cursor()
-    cur.execute(
-        "INSERT INTO chat_data (responses, analysis) VALUES (%s, %s)",
-        (chat_data_responses, chat_data_analysis)
-    )
-    conn.commit()
-    cur.close()
-
     return analysis.choices[0].message['content'].strip()
     # analysis = ask_question(" ".join(r["content"] for r in responses), "You are a skilled psychoanalyst/psychologist interpreting the player's personality through their answers to hypothetical questions. Create an in-depth profile highlighting their philosophical beliefs, attitudes, values, and other personality traits. Make assumptions about their personal life, challenges, and perceptions using concepts like Jungian psychology, pathwork, or the Big Five traits when relevant. Conclude by recommending a song, book, and movie they might enjoy, guessing their age, gender, destined career, and location. Finally, suggest their spirit animal and a color that represents them, and explain why.")
     # return analysis
