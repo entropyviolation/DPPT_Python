@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "personality test w open ai ",
   "scripts": {
-    "start": "gunicorn app:app"
+    "start": "python app.py"
   },
   "dependencies": {
     "three": "^0.151.3",
