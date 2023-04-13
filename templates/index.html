@@ -247,7 +247,6 @@
             $("#next").hide();
             $("#welcome-message").hide();
             $("#chat-container").hide();
-            $("#analysis-panel").show();
             $("#loadingMessage").show();
             
             $(this).hide();
@@ -260,6 +259,7 @@
                 data: JSON.stringify(responses)
             });
             $("#loadingMessage").hide();
+            $("#analysis-panel").show();
 
             // // $("#chat-container").hide();
             // $("#analysis-panel").show();
