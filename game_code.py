@@ -1,6 +1,5 @@
 import openai
 import random
-from models import ChatData, Session
 
 
 def init_api_key():
