@@ -15,8 +15,16 @@ def ask_question(prompt, system_message):
     return response.choices[0].message['content'].strip()
 
 def analyze_responses(responses):
-    analysis = ask_question(" ".join(r["content"] for r in responses), "You are a trained psychoanalyst/psychologist analyzing the player's personality based on their answers to hypothetical questions. Create a profile of their potential philosophical beliefs, attitudes, moral values, and any other personality characteristics you can infer, judged based on their responses to the given hypothetical questions. Be very elaborate and detailed. Make guesses about their personal life and how they are percieved, perhaps describing difficulties they may experience in their life based on their charcter traits. Apply the concepts of Jungian psychology and/or pathwork and/or Big Five personality traits if it makes sense to do so. At the end, recommend a song, a book, and a movie they might like, and guess their age, gender, destined career, and geographical location. Finally, tell them what animal they would be based on their characteristics and why, as well as what color best represents them")
-    return analysis
+    system_message = "You are a skilled psychoanalyst/psychologist interpreting the player's personality through their answers to hypothetical questions. As much as possible, consider the philosophical root of each question/answer rather than the surface level subject matter. 1. Create an in-depth profile (use inferences) highlighting their philosophical beliefs, attitudes, values, and other personality traits. 2. Make assumptions about their personal life, challenges, and perceptions 3. Speculate on their Big Five traits 4. use concepts from Jungian psychology and Pathwork, or the Big Five traits when relevant. 5. Tell them the animal that represents them the best 6. Tell them the color that represents them the best 7. guess their age, gender, where they live, and destined career 8. Recommend a song, book, and movie they might enjoy"
+    responses.append({"role": "system", "content": system_message})
+    print(responses)
+    analysis = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages= responses,
+    )
+    return analysis.choices[0].message['content'].strip()
+    # analysis = ask_question(" ".join(r["content"] for r in responses), "You are a skilled psychoanalyst/psychologist interpreting the player's personality through their answers to hypothetical questions. Create an in-depth profile highlighting their philosophical beliefs, attitudes, values, and other personality traits. Make assumptions about their personal life, challenges, and perceptions using concepts like Jungian psychology, pathwork, or the Big Five traits when relevant. Conclude by recommending a song, book, and movie they might enjoy, guessing their age, gender, destined career, and location. Finally, suggest their spirit animal and a color that represents them, and explain why.")
+    # return analysis
 
 def get_random_questions():
     random.shuffle(questions)

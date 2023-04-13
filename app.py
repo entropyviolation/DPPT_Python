@@ -23,6 +23,7 @@ def follow_up():
 @app.route('/game/analyze', methods=['POST'])
 def analyze():
     responses = request.get_json()
+    print("Received responses:", responses)
     analysis = game_code.analyze_responses(responses)
     return jsonify(analysis)
 

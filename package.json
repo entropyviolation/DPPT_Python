@@ -1,4 +1,10 @@
 {
+  "name": "DPPT",
+  "version": "1.0.0",
+  "description": "personality test w open ai ",
+  "scripts": {
+    "start": "gunicorn app:app"
+  },
   "dependencies": {
     "three": "^0.151.3",
     "vanta": "^0.5.24"
