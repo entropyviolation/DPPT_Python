@@ -15,6 +15,9 @@ class ChatData(Base):
 # Set the DATABASE_URL variable to the connection string
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
+# Replace 'postgres://' with 'postgresql://' in the DATABASE_URL
+DATABASE_URL = DATABASE_URL.replace('postgres://', 'postgresql://', 1)
+
 engine = create_engine(DATABASE_URL)
 Base.metadata.create_all(engine)
 
