@@ -12,37 +12,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">    
-   <style>
-        /* Add styles for the typewriter animation */
-        /* .typewriter {
-        overflow: hidden;
-        border-right: .15em solid transparent;
-        white-space: nowrap;
-        animation: typing 3.5s steps(40, end), blink-caret .5s step-end infinite;
-    } */
-
-    @keyframes typing {
-        from { width: 0 }
-        to { width: 100% }
-    }
-
-    @keyframes blink-caret {
-        50% { border-color: transparent; }
-    }
-
-    /* Add styles for the glow effect */
-    .glow {
-        text-shadow: 0 0 10px transparent, 0 0 20px transparent, 0 0 30px transparent, 0 0 40px transparent, 0 0 50px #ffffff, 0 0 60px #ffffff;
-    }
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
+    <style>
+                
+                
+                /* basic text styles */
         body {
             font-family: 'Red Hat Display', sans-serif;
-            /* background-color: #f0f0f0; */
+            background-color: #080808;
         }
         h1 {
-            /* font-family: 'Inconsolata', sans-serif; */
             color: white;
             text-align: center;
-            /* text-shadow: 2px 2px 4px #374d27; */
         }
 
         p {
@@ -51,6 +36,8 @@
             /* font-family: 'Inconsolata', sans-serif; */
         }
 
+        
+                /* container elements  */
         #analysis-panel, #chat-container {
             max-width: 800px;
             margin: auto;
@@ -58,36 +45,42 @@
             background-color: rgba(0, 0, 0, 0.3); /* Adjust the last value (0.3) to control the translucency */
             border: none;
             border-radius: 50px;
-    }
-
+            position: relative;
+        }
+                /* displays for questions/responses */
         .message {
             padding: 10px;
-            /* font-family: 'Libre Baskerville', serif;  */
             margin-bottom: 15px; 
             background-color: transparent; 
+            font-family: 'Oxygen', sans-serif;
         }
 
         .question {
             background-color: transparent;
             margin-bottom: 15px; 
             padding: 10px;
-            font-family: 'Libre Baskerville', serif;
+            font-family: 'Rubik', sans-serif;
         }
 
         .response-input {
-            font-family: 'Red Hat Display', sans-serif;
+            font-family: 'Oxygen', sans-serif;
             height: 100px;
             resize: vertical;
             padding: 12px 20px;
             font-size: 15px;
             border-radius: 4px;
-            background-color: #faefff;
+            background-color: #e5d8ea;
             width: calc(100% - 40px);
             margin-left: auto;
             margin-right: auto;
             display: block;
         }
 
+        .response-input:focus {
+            outline-color: #374d27;
+        }
+
+                /* sick buttons stuff */
         .sick-button {
             font-family: 'Red Hat Display', sans-serif;
             font-size: 15px;
@@ -107,10 +100,13 @@
             background-size: 400%;
             z-index: 1;
             }
+
         .sick-button:hover {
-                animation: animate 8s linear infinite;
+                animation: button_animate 8s linear infinite;
         }
-        @keyframes animate {
+
+
+        @keyframes button_animate {
             0% {
                 background-position: 0%;
             }
@@ -140,43 +136,121 @@
             animation: animate 8s linear infinite;
             }
 
+        /* Add styles for the glow effect */
+        .glow {
+            text-shadow: 0 0 10px transparent, 0 0 20px transparent, 0 0 30px transparent, 0 0 40px transparent, 0 0 50px #ffffff, 0 0 60px #ffffff;
+        }
+
+         /* Add styles for fast forward button */
+        /* Add styles for fast forward button */
+        .fast-forward {
+            position: relative;
+            width: 27px; /* Adjust the width to match your desired size */
+            height: 17px; /* Adjust the height to match your desired size */
+            background-image: url('static/ff-button.png');
+            background-size: cover;
+            border: none;
+            position: absolute; /* Change from relative to absolute */
+            bottom: 223px; /* Add this line */
+            right: 15px; /* Add this line */
+            cursor: pointer;
+            background-color: transparent; /* Make sure the background is transparent */
+        }
+
+        #loading-container {
+            text-align: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: none;
+        }
+
+        #loading-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: auto;
+        }
+
+        #loading-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            z-index: 1;
+        }
+
+        @keyframes loadingDots {
+            0% { content: "."; }
+            25% { content: ".."; }
+            50% { content: "..."; }
+            75% { content: ""; }
+            100% { content: "."; }
+        }
+
+        #loadingDots {
+            z-index: 1;
+            display: inline-block;
+            animation: loadingDots .5s linear infinite;
+        }
+
     </style>
 </head>
 <body>
     <div id="vanta-bg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
     <p id="welcome-message" >This is a personality test. Please respond as elaborately as possible (the more words, the better). After 15 questions, you will have the option to view the results.</p>
         <!-- Question and response elements will be inserted here using JavaScript -->
-    </div>
     <div id="analysis-panel" style="display: none;">
         <!-- Analysis elements will be inserted here using JavaScript -->
     </div>
     <div id="chat-container">
-        <!-- Analysis elements will be inserted here using JavaScript -->
     </div>
     <button id="analysis" class="sick-button">VIEW ANALYSIS</button>
     <button id="next" class="sick-button">START</button>
-    <h1 id="loadingMessage" style="display:none;">Analysis Loading...</h1>
+    <div id="loading-container">
+        <h1 id="loading-text">Analysis Loading<span id="loadingDots">.</span></h1>
+        <video id="loading-video" src="/static/cd.mp4" autoplay loop muted></video>
+    </div>    
     <script>
-function appendQuestion(question) {
-    const questionElement = $('<div class="question glow"></div>');
-    questionElement.appendTo("#chat-container");
-    new TypeIt(questionElement[0], {
-        strings: question,
-        speed: 80,
-        waitUntilVisible: true
-    }).go();
-}
-    // setTimeout(function() {
-    //     questionElement.removeClass('typewriter');
-    // }, 3500);
+        let sendButton = $('<button class="sick-button" disabled>SEND</button>');
+        let fastForwardButton = $('<button class="fast-forward"></button>');
 
+        /* create question/answer visual elements */
+        function appendQuestion(question) {
+            $("#chat-container").append(fastForwardButton);
+            const questionElement = $('<div class="question glow"></div>');
+            questionElement.appendTo("#chat-container");
+            const typeItInstance = new TypeIt(questionElement[0], {
+                strings: question,
+                speed: 110,
+                lifelike: true,
+                beforeStep: function () {
+                    fastForwardButton.show(); // Add this line
+                },
+                waitUntilVisible: true,
+                afterComplete: function () {
+                    typeItInstance.destroy();
+                    fastForwardButton.hide();
+                    sendButton.prop("disabled", false);
+                    sendButton.css({ "pointer-events": "auto" });
+                }
+            }).go();
 
-function typeQuestion(question) {
-    return new Promise(function(resolve) {
-        appendQuestion(question);
-        setTimeout(resolve, 3500);
-    });
-}
+            fastForwardButton.off().click(function () {
+                typeItInstance.destroy();
+                questionElement.html(question);
+                fastForwardButton.hide();
+                sendButton.prop("disabled", false);
+                sendButton.css({ "pointer-events": "auto" });
+            });
+            // $("#fast-forward").appendTo("#chat-container").css({ "position": "relative", "bottom": "10px", "right": "10px" }).show();
+            sendButton.css({ "pointer-events": "none" });
+        }
+
 
 
         function appendResponse(response) {
@@ -186,7 +260,6 @@ function typeQuestion(question) {
         function getUserInput() {
             return new Promise(function(resolve, reject) {
                 let responseInput = $('<textarea class="response-input"></textarea>');
-                let sendButton = $('<button class="sick-button">SEND</button>');
                 $("#chat-container").append(responseInput);
                 $("#chat-container").append(sendButton);
                 responseInput.focus();
@@ -195,18 +268,21 @@ function typeQuestion(question) {
                     responseInput.remove();
                     sendButton.remove();
                 });
-                responseInput.on('keypress', function(e) {
-                    if (e.which == 13) {
-                        resolve(responseInput.val());
-                        responseInput.remove();
-                        sendButton.remove();
-                    }
-                });
+                // responseInput.on('keypress', function(e) {
+                //     if (e.which == 13) {
+                //         resolve(responseInput.val());
+                //         responseInput.remove();
+                //         sendButton.remove();
+                //     }
+                // });
             });
         }
 
 
         async function startGame() {
+
+            $("#fast-forward").appendTo("#button-container");
+            $("#fast-forward").css({ "position": "absolute", "bottom": "10px", "right": "10px" }).hide();
             
             const questions = await $.getJSON('/game/start');
             let all_responses = [];
@@ -264,13 +340,6 @@ function typeQuestion(question) {
                 }
             }
 
-
-            // for (let question of questions) {
-            //     await askQuestion(question);
-            //     questionCounter++;
-            // }
-
-            // Store all_responses for analysis
             $("#analysis").data("responses", all_responses);
         }
 
@@ -280,7 +349,8 @@ function typeQuestion(question) {
             $("#next").hide();
             $("#welcome-message").hide();
             $("#chat-container").hide();
-            $("#loadingMessage").show();
+            $("#vanta-bg").hide(); // Hide the Vanta.js background
+            $("#loading-container").show();
             
             $(this).hide();
             const responses = $("#analysis").data("responses");
@@ -291,15 +361,12 @@ function typeQuestion(question) {
                 contentType: "application/json",
                 data: JSON.stringify(responses)
             });
-            $("#loadingMessage").hide();
+            $("#vanta-bg").show();
+            $("#loading-container").hide();
             $("#analysis-panel").show();
-
-            // // $("#chat-container").hide();
-            // $("#analysis-panel").show();
-
-            // Display the analysis response in your chat container or any other suitable location
             $("#analysis-panel").append('<div class="message question">Analysis:</div>');
             $("#analysis-panel").append('<div class="message response">' + analysis + '</div>');
+
         });
 
         $(document).ready(function() {
