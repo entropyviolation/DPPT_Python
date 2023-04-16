@@ -22,7 +22,7 @@ def insert_chat_data(analysis, responses):
 
 
 def init_api_key():
-    openai.api_key = "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"
+    openai.api_key = "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"
 
 def ask_question(prompt, system_message):
     response = openai.ChatCompletion.create(
