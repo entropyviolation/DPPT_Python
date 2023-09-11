@@ -1,391 +1,458 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://www.vantajs.com/dist/vanta.cells.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typeit@7.0.4/dist/typeit.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dinner Party Personality Test</title>
-    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">    
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Play&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oxygen&display=swap"
+      rel="stylesheet"
+    />
     <style>
-                
-                
-                /* basic text styles */
-        body {
-            font-family: 'Red Hat Display', sans-serif;
-            background-color: #080808;
-        }
-        h1 {
-            color: white;
-            text-align: center;
-        }
+      /* basic text styles */
+      body {
+        font-family: "Red Hat Display", sans-serif;
+        background-color: #46702a;
+      }
+      h1 {
+        color: white;
+        text-align: center;
+      }
 
-        p {
-            color: white;
-            text-align: center;
-            /* font-family: 'Inconsolata', sans-serif; */
+      p {
+        color: white;
+        text-align: center;
+        /* font-family: 'Inconsolata', sans-serif; */
+      }
+
+      /* container elements  */
+      #analysis-panel,
+      #chat-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.3
+        ); /* Adjust the last value (0.3) to control the translucency */
+        border: none;
+        border-radius: 50px;
+        position: relative;
+      }
+      /* displays for questions/responses */
+      .message {
+        padding: 10px;
+        margin-bottom: 15px;
+        background-color: transparent;
+        font-family: "Oxygen", sans-serif;
+      }
+
+      .question {
+        background-color: transparent;
+        margin-bottom: 15px;
+        padding: 10px;
+        font-family: "Rubik", sans-serif;
+      }
+
+      .response-input {
+        font-family: "Oxygen", sans-serif;
+        height: 100px;
+        resize: vertical;
+        padding: 12px 20px;
+        font-size: 15px;
+        border-radius: 4px;
+        background-color: #e5d8ea;
+        width: calc(100% - 40px);
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+      }
+
+      .response-input:focus {
+        outline-color: #374d27;
+      }
+      /* sick buttons stuff */
+      .sick-button {
+        font-family: "Red Hat Display", sans-serif;
+        font-size: 15px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: #ffffff;
+        padding: 12px 20px;
+        border: none;
+        outline: none;
+        border-radius: 50px;
+        cursor: pointer;
+        display: block;
+        margin: 0 auto;
+        position: relative;
+        margin-top: 20px;
+        background: linear-gradient(90deg, #111, #9a7ea9, #374d27, #111);
+        background-size: 400%;
+        z-index: 1;
+      }
+
+      .sick-button:hover {
+        animation: button_animate 8s linear infinite;
+      }
+
+      @keyframes button_animate {
+        0% {
+          background-position: 0%;
         }
-
-        
-                /* container elements  */
-        #analysis-panel, #chat-container {
-            max-width: 800px;
-            margin: auto;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.3); /* Adjust the last value (0.3) to control the translucency */
-            border: none;
-            border-radius: 50px;
-            position: relative;
+        100% {
+          background-position: 400%;
         }
-                /* displays for questions/responses */
-        .message {
-            padding: 10px;
-            margin-bottom: 15px; 
-            background-color: transparent; 
-            font-family: 'Oxygen', sans-serif;
+      }
+
+      .sick-button:before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        bottom: -5px;
+        left: -5px;
+        z-index: -1;
+        background: linear-gradient(90deg, #111, #9a7ea9, #374d27, #111);
+        background-size: 400%;
+        border-radius: 40px;
+        opacity: 0;
+        transition: 0.5s;
+      }
+
+      .sick-button:hover:before {
+        filter: blur(20px);
+        opacity: 1;
+        animation: animate 8s linear infinite;
+      }
+
+      /* Add styles for the glow effect i */
+      .glow {
+        text-shadow: 0 0 10px transparent, 0 0 20px transparent,
+          0 0 30px transparent, 0 0 40px transparent, 0 0 50px #ffffff,
+          0 0 60px #ffffff;
+      }
+
+      /* Add styles for fast forward button */
+      .fast-forward {
+        position: relative;
+        width: 27px;
+        height: 17px;
+        background-image: url("static/ff-button.png");
+        background-size: cover;
+        border: none;
+        position: absolute; /* Change from relative to absolute */
+        bottom: 223px; /* Add this line */
+        right: 15px; /* Add this line */
+        cursor: pointer;
+        background-color: transparent; /* Make sure the background is transparent */
+      }
+
+      #loading-container {
+        text-align: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        display: none;
+      }
+
+      #loading-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        height: auto;
+      }
+
+      #loading-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -60%);
+        z-index: 1;
+      }
+
+      @keyframes loadingDots {
+        0% {
+          content: ".";
         }
-
-        .question {
-            background-color: transparent;
-            margin-bottom: 15px; 
-            padding: 10px;
-            font-family: 'Rubik', sans-serif;
+        25% {
+          content: "..";
         }
-
-        .response-input {
-            font-family: 'Oxygen', sans-serif;
-            height: 100px;
-            resize: vertical;
-            padding: 12px 20px;
-            font-size: 15px;
-            border-radius: 4px;
-            background-color: #e5d8ea;
-            width: calc(100% - 40px);
-            margin-left: auto;
-            margin-right: auto;
-            display: block;
+        50% {
+          content: "...";
         }
-
-        .response-input:focus {
-            outline-color: #374d27;
+        75% {
+          content: "";
         }
-
-                /* sick buttons stuff */
-        .sick-button {
-            font-family: 'Red Hat Display', sans-serif;
-            font-size: 15px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: #ffffff;
-            padding: 12px 20px;
-            border: none;
-            outline: none;
-            border-radius: 50px;
-            cursor: pointer;
-            display: block;
-            margin: 0 auto;
-            position: relative;
-            margin-top: 20px;
-            background: linear-gradient(90deg, #111, #d2a9e8, #374d27, #111);
-            background-size: 400%;
-            z-index: 1;
-            }
-
-        .sick-button:hover {
-                animation: button_animate 8s linear infinite;
+        100% {
+          content: ".";
         }
+      }
 
-
-        @keyframes button_animate {
-            0% {
-                background-position: 0%;
-            }
-            100% {
-                background-position: 400%;
-            }
-        }
-            
-        .sick-button:before {
-            content: "";
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            bottom: -5px;
-            left: -5px;
-            z-index: -1;
-            background: linear-gradient(90deg, #111, #d2a9e8, #374d27, #111);
-            background-size: 400%;
-            border-radius: 40px;
-            opacity: 0;
-            transition: .5s;
-            }
-            
-        .sick-button:hover:before {
-            filter: blur(20px);
-            opacity: 1;
-            animation: animate 8s linear infinite;
-            }
-
-        /* Add styles for the glow effect i */
-        .glow {
-            text-shadow: 0 0 10px transparent, 0 0 20px transparent, 0 0 30px transparent, 0 0 40px #ffffff, 0 0 50px #ffffff, 0 0 60px #ffffff;
-        }
-
-         /* Add styles for fast forward button */
-        /* Add styles for fast forward button */
-        .fast-forward {
-            position: relative;
-            width: 27px; /* Adjust the width to match your desired size */
-            height: 17px; /* Adjust the height to match your desired size */
-            background-image: url('static/ff-button.png');
-            background-size: cover;
-            border: none;
-            position: absolute; /* Change from relative to absolute */
-            bottom: 223px; /* Add this line */
-            right: 15px; /* Add this line */
-            cursor: pointer;
-            background-color: transparent; /* Make sure the background is transparent */
-        }
-
-        #loading-container {
-            text-align: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            display: none;
-        }
-
-        #loading-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 500px;
-            height: auto;
-        }
-
-        #loading-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -60%);
-            z-index: 1;
-        }
-
-        @keyframes loadingDots {
-            0% { content: "."; }
-            25% { content: ".."; }
-            50% { content: "..."; }
-            75% { content: ""; }
-            100% { content: "."; }
-        }
-
-        #loadingDots {
-            z-index: 1;
-            display: inline-block;
-            animation: loadingDots .5s linear infinite;
-        }
-
+      #loadingDots {
+        z-index: 1;
+        display: inline-block;
+        animation: loadingDots 0.5s linear infinite;
+      }
     </style>
-</head>
-<body>
-    <div id="vanta-bg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
-    <p id="welcome-message" >This is a personality test. Please respond as elaborately as possible (the more words, the better). After 15 questions, you will have the option to view the results.</p>
-        <!-- Question and response elements will be inserted here using JavaScript -->
-    <div id="analysis-panel" style="display: none;">
-        <!-- Analysis elements will be inserted here using JavaScript -->
+  </head>
+  <body>
+    <div
+      id="vanta-bg"
+      style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      "
+    ></div>
+    <p id="welcome-message">
+      This is a personality test. Please respond as elaborately as possible (the
+      more words, the better). After 15 questions, you will have the option to
+      view the results.
+    </p>
+    <!-- Question and response elements will be inserted here using JavaScript -->
+    <div id="analysis-panel" style="display: none">
+      <!-- Analysis elements will be inserted here using JavaScript -->
     </div>
-    <div id="chat-container">
-    </div>
+    <div id="chat-container"></div>
     <button id="analysis" class="sick-button">VIEW ANALYSIS</button>
     <button id="next" class="sick-button">START</button>
     <div id="loading-container">
-        <h1 id="loading-text">Analysis Loading<span id="loadingDots">.</span></h1>
-        <video id="loading-video" src="/static/cd.mp4" autoplay loop muted></video>
-    </div>    
+      <h1 id="loading-text">Analysis Loading<span id="loadingDots">.</span></h1>
+      <video
+        id="loading-video"
+        src="/static/cd.mp4"
+        autoplay
+        loop
+        muted
+      ></video>
+    </div>
     <script>
-        let sendButton = $('<button class="sick-button" disabled>SEND</button>');
-        let fastForwardButton = $('<button class="fast-forward"></button>');
+      let sendButton = $('<button class="sick-button" disabled>SEND</button>');
+      let fastForwardButton = $('<button class="fast-forward"></button>');
 
-        /* create question/answer visual elements */
-        function appendQuestion(question) {
-            $("#chat-container").append(fastForwardButton);
-            const questionElement = $('<div class="question glow"></div>');
-            questionElement.appendTo("#chat-container");
-            const typeItInstance = new TypeIt(questionElement[0], {
-                strings: question,
-                speed: 110,
-                lifelike: true,
-                beforeStep: function () {
-                    fastForwardButton.show(); // Add this line
-                },
-                waitUntilVisible: true,
-                afterComplete: function () {
-                    typeItInstance.destroy();
-                    fastForwardButton.hide();
-                    sendButton.prop("disabled", false);
-                    sendButton.css({ "pointer-events": "auto" });
-                }
-            }).go();
+      /* create question/answer visual elements */
+      function appendQuestion(question) {
+        $("#chat-container").append(fastForwardButton);
+        const questionElement = $('<div class="question glow"></div>');
+        questionElement.appendTo("#chat-container");
+        const typeItInstance = new TypeIt(questionElement[0], {
+          strings: question,
+          speed: 110,
+          lifelike: true,
+          beforeStep: function () {
+            fastForwardButton.show(); // Add this line
+          },
+          waitUntilVisible: true,
+          afterComplete: function () {
+            typeItInstance.destroy();
+            fastForwardButton.hide();
+            sendButton.prop("disabled", false);
+            sendButton.css({ "pointer-events": "auto" });
+          },
+        }).go();
 
-            fastForwardButton.off().click(function () {
-                typeItInstance.destroy();
-                questionElement.html(question);
-                fastForwardButton.hide();
-                sendButton.prop("disabled", false);
-                sendButton.css({ "pointer-events": "auto" });
-            });
-            // $("#fast-forward").appendTo("#chat-container").css({ "position": "relative", "bottom": "10px", "right": "10px" }).show();
-            sendButton.css({ "pointer-events": "none" });
-        }
-
-
-
-        function appendResponse(response) {
-            $("#chat-container").append('<div class="message response">' + response + '</div>');
-        }
-
-        function getUserInput() {
-            return new Promise(function(resolve, reject) {
-                let responseInput = $('<textarea class="response-input"></textarea>');
-                $("#chat-container").append(responseInput);
-                $("#chat-container").append(sendButton);
-                responseInput.focus();
-                sendButton.click(function() {
-                    resolve(responseInput.val());
-                    responseInput.remove();
-                    sendButton.remove();
-                });
-                // responseInput.on('keypress', function(e) {
-                //     if (e.which == 13) {
-                //         resolve(responseInput.val());
-                //         responseInput.remove();
-                //         sendButton.remove();
-                //     }
-                // });
-            });
-        }
-
-
-        async function startGame() {
-
-            $("#fast-forward").appendTo("#button-container");
-            $("#fast-forward").css({ "position": "absolute", "bottom": "10px", "right": "10px" }).hide();
-            
-            const questions = await $.getJSON('/game/start');
-            let all_responses = [];
-            let questionCounter = 0;
-            $("#analysis").hide();
-            $("#chat-container").hide();
-            $("#analysis-panel").hide();
-            
-
-            function handleNextButtonClick() {
-                $("#chat-container").empty();
-                $("#chat-container").show();
-                $("#welcome-message").hide();
-                if (questionCounter < questions.length) {
-                    askQuestion(questions[questionCounter]);
-                    questionCounter++;
-                    if (questionCounter >= questions.length) {
-                        $("#next").hide();
-                    }
-                }
-                $("#next").text("NEXT QUESTION");
-            
-            }
-            $("#next").on("click", handleNextButtonClick);
-
-
-            async function askQuestion(question) {
-                $("#next").hide();
-                appendQuestion(question);
-                let answer = await getUserInput();
-                appendResponse(answer);
-                all_responses.push({"role": "assistant", "content": question});
-                all_responses.push({"role": "user", "content": answer});
-                let context = "You just asked this person" + question +"Ask a single follow-up question, continuing the hypothetical conversation, and subtly encouraging them to elaborate on their answer and reveal more about why they answered the given question the way they did. Perhaps play devil's advocate if it will encourage them to explore other aspects of the original question. They answered" + answer + ". Attempt primarily to get to the heart of WHY they gave that answer.";
-
-                for (let j = 0; j < 2; j++) {
-                    const follow_up_data = {"answer": answer, "context": context};
-                    const follow_up_question = await $.ajax({
-                        url: "/game/follow_up",
-                        type: "POST",
-                        contentType: "application/json",
-                        data: JSON.stringify(follow_up_data)
-                    });
-                    appendQuestion(follow_up_question);
-                    answer = await getUserInput();
-                    appendResponse(answer);
-                    all_responses.push({"role": "assistant", "content": follow_up_question});
-                    all_responses.push({"role": "user", "content": answer});
-                    context += " Note that when asked " + follow_up_question + " they responded " + answer+ ".";
-                }
-                $("#next").show();
-                if (questionCounter >= 5) {
-                    $("#next").hide();
-                    $("#analysis").show();
-                }
-            }
-
-            $("#analysis").data("responses", all_responses);
-        }
-
-
-
-        $("#analysis").click(async function() {
-            $("#next").hide();
-            $("#welcome-message").hide();
-            $("#chat-container").hide();
-            $("#vanta-bg").hide(); // Hide the Vanta.js background
-            $("#loading-container").show();
-            
-            $(this).hide();
-            const responses = $("#analysis").data("responses");
-            console.log("Submitting responses:", responses);
-            const analysis = await $.ajax({
-                url: "/game/analyze",
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(responses)
-            });
-            $("#vanta-bg").show();
-            $("#loading-container").hide();
-            $("#analysis-panel").show();
-            $("#analysis-panel").append('<div class="message question">Analysis:</div>');
-            $("#analysis-panel").append('<div class="message response">' + analysis + '</div>');
-
+        fastForwardButton.off().click(function () {
+          typeItInstance.destroy();
+          questionElement.html(question);
+          fastForwardButton.hide();
+          sendButton.prop("disabled", false);
+          sendButton.css({ "pointer-events": "auto" });
         });
+        // $("#fast-forward").appendTo("#chat-container").css({ "position": "relative", "bottom": "10px", "right": "10px" }).show();
+        sendButton.css({ "pointer-events": "none" });
+      }
 
-        $(document).ready(function() {
-            VANTA.CELLS({
-                el: "#vanta-bg",
-                mouseControls: true,
-                touchControls: true,
-                gyroControls: false,
-                minHeight: 200.00,
-                minWidth: 200.00,
-                scale: 1.00,
-                color1: 0x749b5a,
-                color2: 0xd2a9e8
-                })
+      function appendResponse(response) {
+        $("#chat-container").append(
+          '<div class="message response">' + response + "</div>"
+        );
+      }
+
+      function getUserInput() {
+        return new Promise(function (resolve, reject) {
+          let responseInput = $('<textarea class="response-input"></textarea>');
+          $("#chat-container").append(responseInput);
+          $("#chat-container").append(sendButton);
+          responseInput.focus();
+          sendButton.click(function () {
+            resolve(responseInput.val());
+            responseInput.remove();
+            sendButton.remove();
+          });
+          // responseInput.on('keypress', function(e) {
+          //     if (e.which == 13) {
+          //         resolve(responseInput.val());
+          //         responseInput.remove();
+          //         sendButton.remove();
+          //     }
+          // });
+        });
+      }
+
+      async function startGame() {
+        $("#fast-forward").appendTo("#button-container");
+        $("#fast-forward")
+          .css({ position: "absolute", bottom: "10px", right: "10px" })
+          .hide();
+
+        const questions = await $.getJSON("/game/start");
+        let all_responses = [];
+        let questionCounter = 0;
+        $("#analysis").hide();
+        $("#chat-container").hide();
+        $("#analysis-panel").hide();
+
+        function handleNextButtonClick() {
+          $("#chat-container").empty();
+          $("#chat-container").show();
+          $("#welcome-message").hide();
+          if (questionCounter < questions.length) {
+            askQuestion(questions[questionCounter]);
+            questionCounter++;
+            if (questionCounter >= questions.length) {
+              $("#next").hide();
+            }
+          }
+          $("#next").text("NEXT QUESTION");
+        }
+        $("#next").on("click", handleNextButtonClick);
+
+        async function askQuestion(question) {
+          $("#next").hide();
+          appendQuestion(question);
+          let answer = await getUserInput();
+          appendResponse(answer);
+          all_responses.push({ role: "assistant", content: question });
+          all_responses.push({ role: "user", content: answer });
+          let context =
+            "You just asked this person" +
+            question +
+            "Ask a single follow-up question, continuing the hypothetical conversation, and subtly encouraging them to elaborate on their answer and reveal more about why they answered the given question the way they did. Perhaps play devil's advocate if it will encourage them to explore other aspects of the original question. They answered" +
+            answer +
+            ". Attempt primarily to get to the heart of WHY they gave that answer.";
+
+          for (let j = 0; j < 2; j++) {
+            const follow_up_data = { answer: answer, context: context };
+            const follow_up_question = await $.ajax({
+              url: "/game/follow_up",
+              type: "POST",
+              contentType: "application/json",
+              data: JSON.stringify(follow_up_data),
             });
+            appendQuestion(follow_up_question);
+            answer = await getUserInput();
+            appendResponse(answer);
+            all_responses.push({
+              role: "assistant",
+              content: follow_up_question,
+            });
+            all_responses.push({ role: "user", content: answer });
+            context +=
+              " Note that when asked " +
+              follow_up_question +
+              " they responded " +
+              answer +
+              ".";
+          }
+          $("#next").show();
+          if (questionCounter >= 5) {
+            $("#next").hide();
+            $("#analysis").show();
+          }
+        }
 
+        $("#analysis").data("responses", all_responses);
+      }
 
-        // Start the game when the page loads
-        $(document).ready(startGame);
+      $("#analysis").click(async function () {
+        $("#next").hide();
+        $("#welcome-message").hide();
+        $("#chat-container").hide();
+        $("#vanta-bg").hide(); // Hide the Vanta.js background
+        $("#loading-container").show();
+
+        $(this).hide();
+        const responses = $("#analysis").data("responses");
+        console.log("Submitting responses:", responses);
+        const analysis = await $.ajax({
+          url: "/game/analyze",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(responses),
+        });
+        $("#vanta-bg").show();
+        $("#loading-container").hide();
+        $("#analysis-panel").show();
+        $("#analysis-panel").append(
+          '<div class="message question">Analysis:</div>'
+        );
+        $("#analysis-panel").append(
+          '<div class="message response">' + analysis + "</div>"
+        );
+      });
+
+      $(document).ready(function () {
+        VANTA.CELLS({
+          el: "#vanta-bg",
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.0,
+          minWidth: 200.0,
+          scale: 1.0,
+          color: 0x749b5a,
+          color2: 0x9a7ea9,
+        });
+      });
+
+      // Start the game when the page loads
+      $(document).ready(startGame);
     </script>
-</body>
+  </body>
 </html>
